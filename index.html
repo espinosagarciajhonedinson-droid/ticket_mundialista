@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compra tus boletas para el Mundial 2026. Selecciona el partido y adquiere tus entradas.">
+    <title>🏆 Compra de Tickets - Mundial 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Partículas decorativas -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-content">
+            <img src="trophy.png" alt="Copa del Mundo" class="header-trophy">
+            <div class="header-text">
+                <h1>Mundial 2026</h1>
+                <p class="subtitle">Compra de Boletas Oficial</p>
+            </div>
+            <div class="header-cart" id="header-cart" onclick="scrollToMisCompras()">
+                <span class="cart-icon">🛒</span>
+                <span class="cart-badge" id="cart-badge">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navegación de categorías -->
+    <nav class="nav-tabs" id="nav-tabs">
+        <button class="nav-tab active" data-filter="todos" id="tab-todos">⚽ Todos</button>
+        <button class="nav-tab" data-filter="grupoA" id="tab-grupoA">Grupo A</button>
+        <button class="nav-tab" data-filter="grupoB" id="tab-grupoB">Grupo B</button>
+        <button class="nav-tab" data-filter="grupoC" id="tab-grupoC">Grupo C</button>
+        <button class="nav-tab" data-filter="grupoD" id="tab-grupoD">Grupo D</button>
+        <button class="nav-tab" data-filter="eliminatorias" id="tab-eliminatorias">🏆 Eliminatorias</button>
+    </nav>
+
+    <main class="main-container">
+
+        <!-- Sección: Partidos Disponibles -->
+        <section class="section-matches" id="section-matches">
+            <div class="section-title-bar">
+                <h2>🏟️ Partidos Disponibles</h2>
+                <p>Selecciona el partido y haz clic en <strong>COMPRAR</strong></p>
+            </div>
+            <div class="matches-grid" id="matches-grid">
+                <!-- Se llena dinámicamente -->
+            </div>
+        </section>
+
+        <!-- Sección: Mis Compras -->
+        <section class="section-purchases" id="section-purchases">
+            <div class="section-title-bar">
+                <h2>🛒 Mis Compras</h2>
+                <div class="purchases-counter">
+                    <span class="counter-number" id="counter-number">0</span>
+                    <span>boletas compradas</span>
+                </div>
+            </div>
+
+            <!-- Resumen de costos -->
+            <div class="cost-summary" id="cost-summary" style="display: none;">
+                <div class="cost-row">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">$0</span>
+                </div>
+                <div class="cost-row">
+                    <span>Impuestos (10%):</span>
+                    <span id="impuestos">$0</span>
+                </div>
+                <div class="cost-row total">
+                    <span>💰 Total a pagar:</span>
+                    <span id="total">$0</span>
+                </div>
+            </div>
+
+            <!-- Lista de compras -->
+            <div class="purchases-list" id="purchases-list">
+                <div class="empty-state" id="empty-state">
+                    <div class="empty-icon">🏟️</div>
+                    <h3>No tienes boletas aún</h3>
+                    <p>Selecciona un partido arriba y haz clic en COMPRAR</p>
+                </div>
+            </div>
+
+            <button class="btn-clear-all" id="btn-clear-all" style="display: none;" onclick="limpiarTodo()">
+                🗑️ Eliminar Todas las Boletas
+            </button>
+        </section>
+
+    </main>
+
+    <!-- MODAL de Compra -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal" id="modal">
+            <button class="modal-close" id="modal-close" onclick="cerrarModal()">✕</button>
+            
+            <div class="modal-header" id="modal-header">
+                <!-- Se llena dinámicamente -->
+            </div>
+
+            <form id="ticket-form" class="ticket-form">
+                <input type="hidden" id="form-match-id" name="matchId">
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="nombre">👤 Nombre Completo</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Ej: Juan Pérez" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="documento">🪪 Documento de Identidad</label>
+                        <input type="text" id="documento" name="documento" placeholder="Ej: 1234567890" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">📧 Correo Electrónico</label>
+                        <input type="email" id="email" name="email" placeholder="Ej: juan@correo.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">📱 Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="Ej: 300 123 4567" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoria">💎 Categoría</label>
+                        <select id="categoria" name="categoria" required>
+                            <option value="">Selecciona categoría</option>
+                            <option value="general">🪑 General - $600.000 COP</option>
+                            <option value="preferencial">⭐ Preferencial - $1.400.000 COP</option>
+                            <option value="vip">💎 VIP - $3.000.000 COP</option>
+                            <option value="platinum">👑 Platinum - $6.000.000 COP</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cantidad">🔢 Cantidad</label>
+                        <div class="quantity-control">
+                            <button type="button" class="qty-btn" id="qty-minus">−</button>
+                            <input type="number" id="cantidad" name="cantidad" value="1" min="1" max="10" required>
+                            <button type="button" class="qty-btn" id="qty-plus">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit" id="btn-submit">
+                    <span class="btn-icon">🎫</span>
+                    <span class="btn-text">Confirmar Compra</span>
+                    <span class="btn-shine"></span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>⚽ Mundial 2026 - Sistema de Compra de Boletas</p>
+        <p class="footer-sub">Los datos se guardan localmente en tu navegador</p>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
