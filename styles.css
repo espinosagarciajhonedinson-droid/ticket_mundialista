@@ -467,8 +467,8 @@ body::after {
     display: flex;
     align-items: center;
     gap: 0.4rem;
-    font-size: 0.85rem;
-    color: var(--color-text-secondary);
+    font-size: 1.15rem;
+    color: var(--color-text);
 }
 
 .counter-number {
@@ -490,14 +490,14 @@ body::after {
     display: flex;
     justify-content: space-between;
     padding: 0.45rem 0;
-    font-size: 0.9rem;
+    font-size: 1.15rem;
     color: var(--color-text-secondary);
 }
 
 .cost-row.total {
-    font-size: 1.15rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    color: var(--color-gold-light);
+    color: var(--color-gold-dark);
     padding-top: 0.7rem;
     margin-top: 0.3rem;
     border-top: 1px solid rgba(212,160,23,0.2);
@@ -908,11 +908,11 @@ body::after {
     text-align: center;
     padding: 2rem;
     border-top: 1px solid var(--glass-border);
-    color: var(--color-text-muted);
-    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    font-size: 1.1rem;
 }
 
-.footer-sub { font-size: 0.7rem; margin-top: 0.2rem; opacity: 0.5; }
+.footer-sub { font-size: 0.95rem; margin-top: 0.2rem; opacity: 0.8; }
 
 /* --- Responsive --- */
 @media (max-width: 768px) {
