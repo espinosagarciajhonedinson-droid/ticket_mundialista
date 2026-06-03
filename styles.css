@@ -515,10 +515,10 @@ body::after {
 .purchases-list::-webkit-scrollbar { width: 4px; }
 .purchases-list::-webkit-scrollbar-thumb { background: var(--color-gold-dark); border-radius: 10px; }
 
-.empty-state { text-align: center; padding: 3rem 1rem; opacity: 1; }
-.empty-icon { font-size: 3.5rem; margin-bottom: 0.8rem; }
-.empty-state h3 { font-size: 1.1rem; color: var(--color-text-secondary); margin-bottom: 0.3rem; }
-.empty-state p { font-size: 0.85rem; color: var(--color-text-muted); }
+.empty-state { text-align: center; padding: 4rem 1rem; opacity: 1; }
+.empty-icon { font-size: 5rem; margin-bottom: 1rem; }
+.empty-state h3 { font-size: 1.8rem; color: var(--color-text-secondary); margin-bottom: 0.5rem; }
+.empty-state p { font-size: 1.2rem; color: var(--color-text-muted); }
 
 /* Purchase Card */
 .purchase-card {
