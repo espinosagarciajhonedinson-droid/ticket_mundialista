@@ -314,7 +314,7 @@ body::after {
 }
 
 .match-name {
-    font-size: 1.05rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: var(--color-text);
     line-height: 1.2;
@@ -322,7 +322,7 @@ body::after {
 }
 
 .match-stage {
-    font-size: 0.75rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--color-emerald);
     text-transform: uppercase;
@@ -353,7 +353,7 @@ body::after {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.82rem;
+    font-size: 1.1rem;
     color: var(--color-text-secondary);
 }
 
@@ -404,7 +404,7 @@ body::after {
 }
 
 .match-tickets-info {
-    font-size: 0.8rem;
+    font-size: 1rem;
     color: var(--color-text-muted);
 }
 
@@ -420,12 +420,12 @@ body::after {
 }
 
 .match-price .from-label {
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     color: var(--color-text-muted);
 }
 
 .match-price .price-value {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     font-weight: 800;
     color: var(--color-gold);
 }
@@ -437,7 +437,7 @@ body::after {
     border-radius: var(--radius-sm);
     color: #fff;
     font-family: var(--font);
-    font-size: 0.85rem;
+    font-size: 1rem;
     font-weight: 700;
     letter-spacing: 1.5px;
     text-transform: uppercase;
@@ -580,13 +580,13 @@ body::after {
 }
 
 .purchase-match {
-    font-size: 0.95rem;
+    font-size: 1.2rem;
     font-weight: 700;
     margin-bottom: 0.15rem;
 }
 
 .purchase-meta {
-    font-size: 0.78rem;
+    font-size: 0.95rem;
     color: var(--color-text-secondary);
     display: flex;
     flex-wrap: wrap;
@@ -601,7 +601,7 @@ body::after {
 }
 
 .purchase-price {
-    font-size: 1.05rem;
+    font-size: 1.25rem;
     font-weight: 800;
     color: var(--color-gold);
     white-space: nowrap;
@@ -614,7 +614,7 @@ body::after {
     border-radius: var(--radius-sm);
     color: var(--color-danger);
     font-family: var(--font);
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
@@ -635,7 +635,7 @@ body::after {
     border-radius: var(--radius-md);
     color: var(--color-danger);
     font-family: var(--font);
-    font-size: 0.85rem;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
