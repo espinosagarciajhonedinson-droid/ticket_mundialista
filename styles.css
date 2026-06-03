@@ -18,9 +18,9 @@
     --color-accent: #3b82f6;
     --color-danger: #ef4444;
 
-    --color-text: #1e293b;
-    --color-text-secondary: #475569;
-    --color-text-muted: #94a3b8;
+    --color-text: #0f172a;
+    --color-text-secondary: #334155;
+    --color-text-muted: #64748b;
 
     --color-border: rgba(148, 163, 184, 0.3);
     --color-border-focus: rgba(212, 160, 23, 0.5);
@@ -334,7 +334,7 @@ body::after {
     background: none;
     border: none;
     cursor: pointer;
-    opacity: 0.3;
+    opacity: 0.5;
     transition: var(--transition);
     padding: 0.3rem;
 }
@@ -515,7 +515,7 @@ body::after {
 .purchases-list::-webkit-scrollbar { width: 4px; }
 .purchases-list::-webkit-scrollbar-thumb { background: var(--color-gold-dark); border-radius: 10px; }
 
-.empty-state { text-align: center; padding: 3rem 1rem; opacity: 0.6; }
+.empty-state { text-align: center; padding: 3rem 1rem; opacity: 1; }
 .empty-icon { font-size: 3.5rem; margin-bottom: 0.8rem; }
 .empty-state h3 { font-size: 1.1rem; color: var(--color-text-secondary); margin-bottom: 0.3rem; }
 .empty-state p { font-size: 0.85rem; color: var(--color-text-muted); }
