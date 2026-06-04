@@ -409,7 +409,10 @@ function renderizarCompras() {
             </div>
             <div class="purchase-actions">
                 <div class="purchase-price">$${t.precioTotal.toLocaleString('es-CO')} COP</div>
-                <button class="btn-delete" onclick="eliminarTicket('${t.id}')">🗑️ Eliminar</button>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn-print" onclick="imprimirTicket('${t.id}')">🖨️ Imprimir</button>
+                    <button class="btn-delete" onclick="eliminarTicket('${t.id}')">🗑️ Eliminar</button>
+                </div>
             </div>
         `;
 
@@ -453,6 +456,123 @@ function limpiarTodo() {
 
 function scrollToMisCompras() {
     document.getElementById('section-purchases').scrollIntoView({ behavior: 'smooth' });
+}
+
+function imprimirTicket(id) {
+    const t = tickets.find(ticket => ticket.id === id);
+    if (!t) return;
+
+    const partidoInfo = PARTIDOS.find(p => p.id === t.matchId);
+    const estadio = partidoInfo ? partidoInfo.estadio : 'Por definir';
+    const ciudad = partidoInfo ? partidoInfo.ciudad : '';
+    const fecha = partidoInfo ? partidoInfo.fecha : '';
+
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Ticket Mundial 2026 - ${t.equipo1} vs ${t.equipo2}</title>
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap');
+                body { font-family: 'Outfit', sans-serif; padding: 40px; background: #fff; color: #000; }
+                .ticket { border: 5px solid #d4a017; border-radius: 24px; padding: 40px; max-width: 650px; margin: 0 auto; position: relative; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+                .header { text-align: center; border-bottom: 2px dashed #d4a017; padding-bottom: 20px; margin-bottom: 25px; }
+                .header h1 { margin: 0; font-size: 32px; font-weight: 900; color: #1e3a8a; letter-spacing: 2px; }
+                .header p { margin: 5px 0 0; font-weight: 700; color: #d4a017; }
+                .match-box { text-align: center; background: #f8fafc; border-radius: 16px; padding: 20px; margin-bottom: 25px; border: 1px solid #e2e8f0; }
+                .match-teams { font-size: 28px; font-weight: 900; color: #0f172a; display: flex; align-items: center; justify-content: center; gap: 15px; }
+                .stage { font-size: 14px; color: #10b981; font-weight: 800; text-transform: uppercase; margin-top: 8px; letter-spacing: 1px; }
+                .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+                .item { margin-bottom: 15px; }
+                .label { font-size: 11px; color: #64748b; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+                .val { font-size: 16px; font-weight: 700; color: #0f172a; }
+                .price-box { margin-top: 25px; padding-top: 20px; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
+                .total-label { font-size: 14px; font-weight: 700; color: #64748b; }
+                .total-val { font-size: 24px; font-weight: 900; color: #b8860b; }
+                .footer { text-align: center; margin-top: 30px; font-size: 11px; color: #94a3b8; line-height: 1.5; }
+                .qr { width: 90px; height: 90px; border: 2px solid #0f172a; margin: 20px auto; padding: 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; }
+                .id { font-family: monospace; font-size: 10px; color: #cbd5e1; margin-top: 10px; }
+                .watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 120px; opacity: 0.03; font-weight: 900; pointer-events: none; white-space: nowrap; }
+                @media print {
+                    body { padding: 0; }
+                    .ticket { box-shadow: none; border-width: 3px; }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="ticket">
+                <div class="watermark">WORLD CUP 2026</div>
+                <div class="header">
+                    <h1>FIFA WORLD CUP 2026</h1>
+                    <p>OFFICIAL ENTRY TICKET</p>
+                </div>
+                <div class="match-box">
+                    <div class="match-teams">
+                        <span>${t.flag1} ${t.equipo1}</span>
+                        <span style="font-size: 18px; color: #94a3b8;">VS</span>
+                        <span>${t.equipo2} ${t.flag2}</span>
+                    </div>
+                    <div class="stage">${t.stage}</div>
+                </div>
+                <div class="grid">
+                    <div class="item">
+                        <div class="label">Stadium</div>
+                        <div class="val">${estadio}</div>
+                    </div>
+                    <div class="item">
+                        <div class="label">City / Host</div>
+                        <div class="val">${ciudad}</div>
+                    </div>
+                    <div class="item">
+                        <div class="label">Date</div>
+                        <div class="val">${fecha}</div>
+                    </div>
+                    <div class="item">
+                        <div class="label">Time</div>
+                        <div class="val">18:00 Local</div>
+                    </div>
+                    <div class="item">
+                        <div class="label">Attendee Name</div>
+                        <div class="val">${t.nombre}</div>
+                    </div>
+                    <div class="item">
+                        <div class="label">Document ID</div>
+                        <div class="val">${t.documento}</div>
+                    </div>
+                    <div class="item">
+                        <div class="label">Category</div>
+                        <div class="val">${t.categoria.toUpperCase()}</div>
+                    </div>
+                    <div class="item">
+                        <div class="label">Quantity</div>
+                        <div class="val">${t.cantidad} Tickets</div>
+                    </div>
+                </div>
+                <div class="price-box">
+                    <div class="total-label">PAYMENT CONFIRMED</div>
+                    <div class="total-val">$${t.precioTotal.toLocaleString('es-CO')} COP</div>
+                </div>
+                <div class="qr">
+                    <div style="font-size: 40px; margin-bottom: -5px;">📱</div>
+                    SCAN ME
+                </div>
+                <div class="footer">
+                    This ticket is valid for one person. Present this digital or printed version at the stadium gate.<br>
+                    No refunds. Admission subject to FIFA stadium regulations.
+                    <div class="id">REFERENCE ID: ${t.id}</div>
+                </div>
+            </div>
+            <script>
+                window.onload = function() {
+                    window.print();
+                    setTimeout(() => window.close(), 500);
+                }
+            </script>
+        </body>
+        </html>
+    `);
+    printWindow.document.close();
 }
 
 // ---- localStorage ----
